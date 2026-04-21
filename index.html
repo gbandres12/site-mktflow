@@ -14,8 +14,321 @@
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Local CSS -->
-    <link rel="stylesheet" href="style.css">
+    <!-- Embedded CSS for bulletproof loading -->
+    <style>
+:root {
+    --primary: #000000;
+    --primary-dark: #333333;
+    --secondary: #666666;
+    --accent: #ff0000;
+    --bg-dark: #FFFFFF;
+    --bg-card: #FFFFFF;
+    --bg-muted: #F7F7F7;
+    --text-main: #1a1a1a;
+    --text-muted: #666666;
+    --border: #e5e5e5;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    font-family: 'Inter', -apple-system, sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+}
+
+a {
+    text-decoration: none;
+    transition: 0.3s;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+}
+
+/* Utilities */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 14px 32px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: #fff !important;
+    border: 1px solid var(--primary);
+}
+
+.btn-primary:hover {
+    background: var(--primary-dark);
+}
+
+.btn-outline {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-main);
+}
+
+.btn-outline:hover {
+    background: var(--bg-muted);
+}
+
+.section-padding {
+    padding: 100px 0;
+}
+
+.section-tag {
+    color: var(--primary);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 16px;
+}
+
+/* Header */
+header {
+    padding: 20px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    transition: 0.3s;
+}
+
+header.scrolled {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo img {
+    height: 40px;
+}
+
+/* Hero Section */
+.hero {
+    padding-top: 180px;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: clamp(2.5rem, 8vw, 4rem);
+    line-height: 1.1;
+    margin-bottom: 24px;
+}
+
+.hero p {
+    font-size: 1.25rem;
+    color: var(--text-muted);
+    max-width: 700px;
+    margin: 0 auto 40px;
+}
+
+.hero-btns {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    margin-bottom: 60px;
+}
+
+.hero-mockup {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 4px;
+    background: #fff;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.05);
+}
+
+.hero-mockup img {
+    width: 100%;
+    border-radius: 8px;
+    display: block;
+}
+
+/* System Showcase */
+.system-showcase {
+    background: var(--bg-muted);
+}
+
+.showcase-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.main-mockup-container {
+    position: relative;
+    max-width: 1100px;
+    margin: 0 auto 80px;
+}
+
+.mockup-wrapper {
+    background: #FFFFFF;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 4px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+}
+
+.mockup-wrapper img {
+    width: 100%;
+    border-radius: 8px;
+    display: block;
+}
+
+.floating-tag {
+    position: absolute;
+    padding: 8px 16px;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    z-index: 10;
+}
+
+.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--primary); }
+
+.tag-1 { top: 10%; left: -5%; }
+.tag-2 { bottom: 20%; right: -5%; }
+.tag-3 { bottom: 50%; left: -8%; }
+.tag-4 { top: 30%; right: -8%; }
+.tag-5 { top: -5%; left: 20%; }
+.tag-6 { bottom: -5%; right: 20%; }
+
+.secondary-prints {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.print-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: 0.3s;
+}
+
+.print-card:hover { transform: translateY(-5px); border-color: var(--primary); }
+.print-card img { width: 100%; display: block; }
+.print-info { padding: 20px; }
+
+/* Pain Cards */
+.pain-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+}
+
+.pain-card {
+    padding: 32px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: #fff;
+}
+
+.pain-card i { font-size: 2rem; color: var(--accent); margin-bottom: 20px; }
+
+/* Transformation */
+.transformation {
+    background: var(--bg-muted);
+    border-radius: 24px;
+    padding: 40px;
+}
+
+.comparison-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.comparison-box { padding: 40px; background: #fff; }
+.comparison-list li { margin-bottom: 12px; display: flex; gap: 10px; align-items: flex-start; }
+.comparison-list i.fa-circle-xmark { color: var(--accent); }
+.comparison-list i.fa-circle-check { color: var(--primary); }
+
+/* Pricing */
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.pricing-card {
+    padding: 40px;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    background: #fff;
+    position: relative;
+}
+
+.pricing-card.featured { border: 2px solid var(--primary); transform: scale(1.05); z-index: 2; }
+.price { font-size: 3rem; font-weight: 800; margin: 20px 0; }
+.price span { font-size: 1rem; color: var(--text-muted); }
+
+/* FAQ */
+.faq-grid { max-width: 800px; margin: 0 auto; }
+.faq-item { border-bottom: 1px solid var(--border); padding: 20px 0; }
+.faq-question { display: flex; justify-content: space-between; cursor: pointer; }
+.faq-answer { padding-top: 15px; color: var(--text-muted); display: none; }
+.faq-item.active .faq-answer { display: block; }
+
+/* Final CTA */
+.final-cta {
+    background: #000;
+    color: #fff;
+    padding: 80px 20px;
+    text-align: center;
+    border-radius: 20px;
+}
+
+footer { padding: 40px 0; border-top: 1px solid var(--border); text-align: center; color: var(--text-muted); margin-top: 80px; }
+
+@media (max-width: 768px) {
+    .pricing-card.featured { transform: none; }
+    .hero h1 { font-size: 2.5rem; }
+}
+    </style>
 </head>
 <body>
 
@@ -168,7 +481,7 @@
             <h2 style="text-align: center; margin-bottom: 40px;">Dúvidas Frequentes</h2>
             <div class="faq-grid">
                 <div class="faq-item"><div class="faq-question"><h4>Serve para freelancer?</h4><i class="fa-solid fa-chevron-down"></i></div><div class="faq-answer">Sim! Plano Starter focado em você.</div></div>
-                <div class="faq-item"><div class="faq-question"><h4>É fácil de usar?</h4><i class="fa-solid fa-chevron-down"></i></div><div class="faq-answer">Mito fácil, setup em minutos.</div></div>
+                <div class="faq-item"><div class="faq-question"><h4>É fácil de usar?</h4><i class="fa-solid fa-chevron-down"></i></div><div class="faq-answer">Muito fácil, setup em minutos.</div></div>
             </div>
         </div>
     </section>
